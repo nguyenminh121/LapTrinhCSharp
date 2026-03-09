@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    var counts = (Dictionary<string, int>)ViewBag.Counts;
+}
+
+<h2 class="mb-4">FIT Admin Dashboard</h2>
+
+<div class="row g-4">
+    <div class="col-md-4 col-lg-3">
+        <div class="card text-white bg-primary h-100">
+            <div class="card-body">
+                <h5 class="card-title">Khoa</h5>
+                <p class="display-6">@counts["faculties"]</p>
+            </div>
+            <div class="card-footer"><a asp-controller="Faculty" asp-action="Index" class="text-white">Quản lý &raquo;</a></div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-3">
+        <div class="card text-white bg-success h-100">
+            <div class="card-body">
+                <h5 class="card-title">Giảng viên</h5>
+                <p class="display-6">@counts["instructors"]</p>
+            </div>
+            <div class="card-footer"><a asp-controller="Instructor" asp-action="Index" class="text-white">Quản lý &raquo;</a></div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-3">
+        <div class="card text-white bg-info h-100">
+            <div class="card-body">
+                <h5 class="card-title">Ngành học</h5>
+                <p class="display-6">@counts["majors"]</p>
+            </div>
+            <div class="card-footer"><a asp-controller="Major" asp-action="Index" class="text-white">Quản lý &raquo;</a></div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-3">
+        <div class="card text-white bg-warning h-100">
+            <div class="card-body">
+                <h5 class="card-title">Khóa tuyển sinh</h5>
+                <p class="display-6">@counts["intakes"]</p>
+            </div>
+            <div class="card-footer"><a asp-controller="Intake" asp-action="Index" class="text-white">Quản lý &raquo;</a></div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-3">
+        <div class="card text-white bg-danger h-100">
+            <div class="card-body">
+                <h5 class="card-title">Môn học</h5>
+                <p class="display-6">@counts["courses"]</p>
+            </div>
+            <div class="card-footer"><a asp-controller="Course" asp-action="Index" class="text-white">Quản lý &raquo;</a></div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-3">
+        <div class="card text-white bg-secondary h-100">
+            <div class="card-body">
+                <h5 class="card-title">CTĐT</h5>
+                <p class="display-6">@counts["curriculums"]</p>
+            </div>
+            <div class="card-footer"><a asp-controller="Curriculum" asp-action="Index" class="text-white">Quản lý &raquo;</a></div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-3">
+        <div class="card text-white bg-dark h-100">
+            <div class="card-body">
+                <h5 class="card-title">Đề cương</h5>
+                <p class="display-6">@counts["syllabi"]</p>
+            </div>
+            <div class="card-footer"><a asp-controller="Syllabus" asp-action="Index" class="text-white">Quản lý &raquo;</a></div>
+        </div>
+    </div>
+</div>

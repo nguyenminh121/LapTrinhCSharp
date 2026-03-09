@@ -1,0 +1,51 @@
+@model List<Course>
+@{
+    ViewData["Title"] = "Qu?n lý Môn h?c";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>@ViewData["Title"]</h2>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i> Thêm m?i
+    </a>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Mã môn</th>
+            <th>Tên (VI)</th>
+            <th>Tên (EN)</th>
+            <th>Tín ch?</th>
+            <th>Gi? LT</th>
+            <th>Gi? TH</th>
+            <th>Ngày t?o</th>
+            <th style="width: 180px">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td><strong>@item.Code</strong></td>
+                <td>@item.NameVi</td>
+                <td>@item.NameEn</td>
+                <td>@item.Credit</td>
+                <td>@item.LectureHours</td>
+                <td>@item.SelfStudyHours</td>
+                <td>@item.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">S?a</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Ch?a có d? li?u môn h?c nào.</div>
+}

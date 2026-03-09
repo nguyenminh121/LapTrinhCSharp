@@ -1,0 +1,56 @@
+@model Course
+@{
+    ViewData["Title"] = "Ch?nh s?a Môn h?c";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Code" class="form-label"></label>
+                    <input asp-for="Code" class="form-control" />
+                    <span asp-validation-for="Code" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Credit" class="form-label"></label>
+                    <input asp-for="Credit" class="form-control" type="number" />
+                    <span asp-validation-for="Credit" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NameVi" class="form-label"></label>
+                <input asp-for="NameVi" class="form-control" />
+                <span asp-validation-for="NameVi" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NameEn" class="form-label"></label>
+                <input asp-for="NameEn" class="form-control" />
+                <span asp-validation-for="NameEn" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="LectureHours" class="form-label"></label>
+                    <input asp-for="LectureHours" class="form-control" type="number" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="SelfStudyHours" class="form-label"></label>
+                    <input asp-for="SelfStudyHours" class="form-control" type="number" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">C?p nh?t</button>
+            <a asp-action="Index" class="btn btn-secondary">H?y</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

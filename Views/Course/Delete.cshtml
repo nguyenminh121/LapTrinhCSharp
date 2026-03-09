@@ -1,0 +1,33 @@
+@model Course
+@{
+    ViewData["Title"] = "Xóa Môn h?c";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-warning">
+    <h5>B?n có ch?c ch?n mu?n xóa môn h?c này?</h5>
+</div>
+
+<div class="card" style="max-width: 500px;">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">ID</dt>
+            <dd class="col-sm-8">@Model.Id</dd>
+            <dt class="col-sm-4">Mã môn</dt>
+            <dd class="col-sm-8">@Model.Code</dd>
+            <dt class="col-sm-4">Tên (VI)</dt>
+            <dd class="col-sm-8">@Model.NameVi</dd>
+            <dt class="col-sm-4">Tên (EN)</dt>
+            <dd class="col-sm-8">@Model.NameEn</dd>
+            <dt class="col-sm-4">Tín ch?</dt>
+            <dd class="col-sm-8">@Model.Credit</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post" class="mt-3">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Xác nh?n xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">H?y</a>
+</form>

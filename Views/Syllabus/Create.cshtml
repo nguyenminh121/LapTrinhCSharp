@@ -1,0 +1,45 @@
+@model Syllabus
+@{
+    ViewData["Title"] = "Thêm ?? c??ng m?i";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label asp-for="CourseId" class="form-label"></label>
+                <select asp-for="CourseId" asp-items="@((List<SelectListItem>)ViewBag.Courses)" class="form-select"></select>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Version" class="form-label"></label>
+                    <input asp-for="Version" class="form-control" placeholder="VD: 1.0, 2.0" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Language" class="form-label"></label>
+                    <select asp-for="Language" asp-items="@((List<SelectListItem>)ViewBag.Languages)" class="form-select"></select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="AdjustmentDate" class="form-label"></label>
+                    <input asp-for="AdjustmentDate" class="form-control" type="date" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ApprovedBy" class="form-label"></label>
+                <input asp-for="ApprovedBy" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">L?u</button>
+            <a asp-action="Index" class="btn btn-secondary">H?y</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

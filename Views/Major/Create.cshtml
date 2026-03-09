@@ -1,0 +1,37 @@
+@model Major
+@{
+    ViewData["Title"] = "Thêm Ngành h?c m?i";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="FacultyId" class="form-label"></label>
+                <select asp-for="FacultyId" asp-items="@((List<SelectListItem>)ViewBag.Faculties)" class="form-select"></select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="DegreeLevel" class="form-label"></label>
+                <select asp-for="DegreeLevel" asp-items="@((List<SelectListItem>)ViewBag.DegreeLevels)" class="form-select"></select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="RequiredCredits" class="form-label"></label>
+                <input asp-for="RequiredCredits" class="form-control" type="number" />
+                <span asp-validation-for="RequiredCredits" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">L?u</button>
+            <a asp-action="Index" class="btn btn-secondary">H?y</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

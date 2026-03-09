@@ -1,0 +1,31 @@
+@model Curriculum
+@{
+    ViewData["Title"] = "Xóa Ch??ng trình ?ào t?o";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-warning">
+    <h5>B?n có ch?c ch?n mu?n xóa ch??ng trình ?ào t?o này?</h5>
+</div>
+
+<div class="card" style="max-width: 500px;">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">ID</dt>
+            <dd class="col-sm-8">@Model.Id</dd>
+            <dt class="col-sm-4">Ngành</dt>
+            <dd class="col-sm-8">@Model.MajorName</dd>
+            <dt class="col-sm-4">Khóa</dt>
+            <dd class="col-sm-8">@Model.IntakeCode</dd>
+            <dt class="col-sm-4">T?ng tín ch?</dt>
+            <dd class="col-sm-8">@Model.TotalCredits</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post" class="mt-3">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Xác nh?n xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">H?y</a>
+</form>
