@@ -1,0 +1,39 @@
+@model IEnumerable<LuyenTap.Models.Product>
+
+@{
+    ViewData["Title"] = "Quan ly san pham";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Quan ly san pham</h2>
+    <a class="btn btn-primary" asp-controller="AdminProducts" asp-action="Create">Them san pham</a>
+</div>
+
+<table class="table table-striped table-bordered align-middle">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>CategoryID</th>
+            <th>ModelNumber</th>
+            <th>ModelName</th>
+            <th>UnitCost</th>
+            <th style="width:180px;">Thao tac</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.CategoryId</td>
+                <td>@item.ModelNumber</td>
+                <td>@item.ModelName</td>
+                <td>@item.UnitCost.ToString("N0") VND</td>
+                <td>
+                    <a class="btn btn-sm btn-warning" asp-controller="AdminProducts" asp-action="Edit" asp-route-id="@item.Id">Sua</a>
+                    <a class="btn btn-sm btn-danger" asp-controller="AdminProducts" asp-action="Delete" asp-route-id="@item.Id">Xoa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

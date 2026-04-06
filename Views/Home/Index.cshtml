@@ -1,0 +1,68 @@
+﻿@model LuyenTap.Models.HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "MyStudents Database";
+}
+
+<div class="mb-4">
+    <h1 class="display-5">Du lieu tu DB: @Model.SourceDatabase</h1>
+    <p class="text-muted">Trang nay dang hien toan bo bang va du lieu trong database mystudents.</p>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+else if (!Model.Tables.Any())
+{
+    <div class="alert alert-warning">Khong tim thay bang nao trong database mystudents.</div>
+}
+else
+{
+    @foreach (var table in Model.Tables)
+    {
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between">
+                <strong>@table.Schema.@table.TableName</strong>
+                <span>@table.Rows.Count dong</span>
+            </div>
+
+            <div class="card-body p-0">
+                @if (!table.Columns.Any())
+                {
+                    <div class="p-3">Bang khong co cot.</div>
+                }
+                else if (!table.Rows.Any())
+                {
+                    <div class="p-3">Bang khong co du lieu.</div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered mb-0">
+                            <thead>
+                                <tr>
+                                    @foreach (var column in table.Columns)
+                                    {
+                                        <th>@column</th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var row in table.Rows)
+                                {
+                                    <tr>
+                                        @foreach (var column in table.Columns)
+                                        {
+                                            <td>@row[column]</td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,75 @@
+﻿@using System.Globalization
+@using LuyenTap
+@{
+    ViewData["Title"] = "Tinh Lai Suat";
+
+    var amountText = Context.Request.Query["loanAmount"].ToString();
+    var termText = Context.Request.Query["loanTermMonths"].ToString();
+
+    var hasInput = !string.IsNullOrWhiteSpace(amountText) || !string.IsNullOrWhiteSpace(termText);
+
+    decimal loanAmount = 0;
+    int loanTermMonths = 0;
+
+    LoanInterestResult? result = null;
+    var errorMessage = string.Empty;
+
+    if (hasInput)
+    {
+        var amountOk = decimal.TryParse(amountText, NumberStyles.Number, CultureInfo.InvariantCulture, out loanAmount)
+            || decimal.TryParse(amountText, NumberStyles.Number, CultureInfo.CurrentCulture, out loanAmount);
+
+        var termOk = int.TryParse(termText, out loanTermMonths);
+
+        if (!amountOk || !termOk)
+        {
+            errorMessage = "Invalid input. Please enter numeric values.";
+        }
+        else
+        {
+            var calculator = new TinhLaiSuat();
+            if (!calculator.TryCalculate(loanAmount, loanTermMonths, out result, out errorMessage))
+            {
+                result = null;
+            }
+        }
+    }
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <h1 class="mb-3">Tinh lai suat vay ngan hang</h1>
+        <p class="text-muted">Nhap so tien vay va thoi han vay, sau do bam Calculate.</p>
+
+        <form method="get" asp-controller="Home" asp-action="TinhLaiSuat" class="card p-4 shadow-sm mb-4">
+            <div class="mb-3">
+                <label for="loanAmount" class="form-label">Loan amount (VND)</label>
+                <input id="loanAmount" name="loanAmount" class="form-control" value="@amountText" placeholder="Example: 100000000" />
+            </div>
+
+            <div class="mb-3">
+                <label for="loanTermMonths" class="form-label">Loan term (months)</label>
+                <input id="loanTermMonths" name="loanTermMonths" class="form-control" value="@termText" placeholder="Example: 24" />
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Calculate</button>
+            </div>
+        </form>
+
+        @if (!string.IsNullOrWhiteSpace(errorMessage))
+        {
+            <div class="alert alert-danger">@errorMessage</div>
+        }
+
+        @if (result != null)
+        {
+            <div class="card p-4">
+                <h4 class="mb-3">Result</h4>
+                <p><strong>Interest rate:</strong> @((result.InterestRate * 100).ToString("0.##"))% / year</p>
+                <p><strong>Interest amount:</strong> @result.InterestAmount.ToString("N2") VND</p>
+                <p class="mb-0"><strong>Total amount payable:</strong> @result.TotalPayable.ToString("N2") VND</p>
+            </div>
+        }
+    </div>
+</div>

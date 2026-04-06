@@ -1,0 +1,56 @@
+@model List<LuyenTap.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Gio hang";
+    var grandTotal = Model.Sum(x => x.TotalPrice);
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Gio hang cua ban</h2>
+    <a class="btn btn-outline-secondary" asp-controller="Products" asp-action="Index">Tiep tuc mua hang</a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Gio hang dang trong.</div>
+}
+else
+{
+    <table class="table table-bordered align-middle">
+        <thead>
+            <tr>
+                <th>San pham</th>
+                <th>Don gia</th>
+                <th>So luong</th>
+                <th>Thanh tien</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.UnitPrice.ToString("N0") VND</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.TotalPrice.ToString("N0") VND</td>
+                    <td style="width:110px;">
+                        <form asp-controller="Cart" asp-action="Remove" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="productId" value="@item.ProductId" />
+                            <button class="btn btn-sm btn-danger" type="submit">Xoa</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <h4>Tong cong: <span class="text-danger">@grandTotal.ToString("N0") VND</span></h4>
+        <form asp-controller="Cart" asp-action="Clear" method="post">
+            @Html.AntiForgeryToken()
+            <button class="btn btn-outline-danger" type="submit">Xoa tat ca</button>
+        </form>
+    </div>
+}

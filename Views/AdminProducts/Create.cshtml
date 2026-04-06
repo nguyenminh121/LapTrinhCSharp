@@ -1,0 +1,18 @@
+@model LuyenTap.Models.Product
+
+@{
+    ViewData["Title"] = "Them san pham";
+}
+
+<h2>Them san pham</h2>
+
+<form asp-controller="AdminProducts" asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <partial name="_ProductForm" model="Model" />
+    <button type="submit" class="btn btn-primary">Luu</button>
+    <a asp-controller="AdminProducts" asp-action="Index" class="btn btn-secondary">Huy</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
