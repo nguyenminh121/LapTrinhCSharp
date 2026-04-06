@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LuyenTap")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71008d337bce8951c4c084f56662adaddd9632bf")]
 [assembly: System.Reflection.AssemblyProductAttribute("LuyenTap")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LuyenTap")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
